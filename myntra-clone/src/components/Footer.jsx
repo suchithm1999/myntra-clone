@@ -6,7 +6,7 @@ import { AiFillInstagram } from "react-icons/ai";
 function Footer() {
   return (
     <>
-      <div className="absolute bottom-auto w-full bg-gray-50">
+      <div className=" bottom-auto w-full bg-gray-50 p-1">
         <div className="w-2/3 justify-between m-auto mb-10 mt-8 flex gap-14">
           <div className="flex flex-col gap-4">
             <span className="text-xs font-semibold">ONLINE SHOPPING</span>

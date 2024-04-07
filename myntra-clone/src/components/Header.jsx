@@ -3,67 +3,76 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { AiOutlineUser } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { MdOutlineShoppingBag } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const BagItems = useSelector((store) => store.Bag);
+  const bagItemsLength = BagItems.length;
   return (
     <>
-      <div className="p-0 m-0 h-20 bg-white shadow-lg fixed w-full">
-        <div className="w-full h-full flex items-center">
-          <img
-            src="src/assets/Myntra-icon-logo.svg"
-            alt="myntra-logo"
-            className="w-14 h-9 ml-16 cursor-pointer"
-          />
-          <nav
-            className="flex h-full font-semibold opacity-70 mx-14 ml-16 gap-2"
-            style={{ fontSize: "12px" }}
+      <div className="p-0 m-0 h-20 bg-white shadow-lg w-auto top-0 z-10 sticky">
+        <div className=" h-full flex items-center">
+          <div className="flex w-full h-full items-center">
+            <img
+              style={{ marginLeft: "8%" }}
+              src="https://cdn.iconscout.com/icon/free/png-256/free-myntra-2709168-2249158.png"
+              alt="myntra-logo"
+              className="w-14 h-14 cursor-pointer"
+            />
+            <nav
+              className="flex h-full font-semibold opacity-70 gap-2 w-full"
+              style={{ fontSize: "12px", marginLeft: "7%" }}
+            >
+              <div className="h-full flex items-center hover:border-b-4 border-red-600 px-1 mx-1">
+                <NavLink to="#" className="p-2 w-max">
+                  MEN
+                </NavLink>
+              </div>
+              <div className="h-full flex items-center hover:border-b-4 border-pink-700 px-1 mx-1">
+                <NavLink to="#" className="p-2 w-max">
+                  WOMEN
+                </NavLink>
+              </div>
+              <div className="h-full flex items-center hover:border-b-4 border-orange-600 px-1 mx-1">
+                <NavLink to="#" className="p-2 w-max">
+                  KIDS
+                </NavLink>
+              </div>
+              <div className="h-full flex items-center mx-1 hover:border-b-4 border-yellow-600 px-1">
+                <NavLink to="#" className="p-2 w-max">
+                  HOME & LIVING
+                </NavLink>
+              </div>
+              <div className="h-full flex items-center mx-1 hover:border-b-4 border-green-600 px-1">
+                <NavLink to="#" className="p-2 w-max">
+                  BEAUTY
+                </NavLink>
+              </div>
+              <div className="h-full flex items-center mx-1 hover:border-b-4 border-red-600 px-1">
+                <NavLink to="#" className="p-2 w-max">
+                  STUDIO
+                  <span
+                    className="badge badge-pill badge-light text-red-500"
+                    style={{
+                      fontSize: "9px",
+                      top: "-8px",
+                      position: "relative",
+                      left: "2px",
+                    }}
+                  >
+                    NEW
+                  </span>
+                </NavLink>
+              </div>
+            </nav>
+          </div>
+          <div
+            style={{ marginRight: "4%" }}
+            className="w-full flex justify-center gap-16"
           >
-            <div className="h-full flex items-center hover:border-b-4 border-red-600 px-1 mx-1">
-              <NavLink to="#" className="p-2 w-max">
-                MEN
-              </NavLink>
-            </div>
-            <div className="h-full flex items-center hover:border-b-4 border-pink-700 px-1 mx-1">
-              <NavLink to="#" className="p-2 w-max">
-                WOMEN
-              </NavLink>
-            </div>
-            <div className="h-full flex items-center hover:border-b-4 border-orange-600 px-1 mx-1">
-              <NavLink to="#" className="p-2 w-max">
-                KIDS
-              </NavLink>
-            </div>
-            <div className="h-full flex items-center mx-1 hover:border-b-4 border-yellow-600 px-1">
-              <NavLink to="#" className="p-2 w-max">
-                HOME & LIVING
-              </NavLink>
-            </div>
-            <div className="h-full flex items-center mx-1 hover:border-b-4 border-green-600 px-1">
-              <NavLink to="#" className="p-2 w-max">
-                BEAUTY
-              </NavLink>
-            </div>
-            <div className="h-full flex items-center mx-1 hover:border-b-4 border-red-600 px-1">
-              <NavLink to="#" className="p-2 w-max">
-                STUDIO
-                <span
-                  className="badge badge-pill badge-light text-red-500"
-                  style={{
-                    fontSize: "9px",
-                    top: "-8px",
-                    position: "relative",
-                    left: "2px",
-                  }}
-                >
-                  NEW
-                </span>
-              </NavLink>
-            </div>
-          </nav>
-          <div className="w-full flex justify-center gap-16 ml-16">
             <div
-              style={{ width: "700px" }}
-              className="input-group mb-3 h-11 items-center flex gap-2 bg-gray-100 rounded-lg m-2"
+              style={{ maxWidth: "700px" }}
+              className="input-group mb-3 h-11 items-center flex gap-2 bg-gray-100 rounded-lg m-2 w-full"
             >
               <div className="input-group-prepend m-3 mr-1">
                 <span className="input-group-text" id="basic-addon1">
@@ -85,13 +94,16 @@ function Header() {
                   Profile
                 </span>
               </div>
-              <div className="flex flex-col items-center gap-1 cursor-pointer">
+              <div className="flex flex-col items-center gap-1 cursor-pointer relative">
                 <AiOutlineHeart className="text-xl text-gray-700" />
                 <span style={{ fontSize: "10px" }} className="font-bold">
                   Wishlist
                 </span>
               </div>
-              <div className="flex flex-col items-center gap-1 cursor-pointer">
+              <div className="flex flex-col items-center gap-1 cursor-pointer relative">
+                <div className="absolute -top-2 font-semibold -right-2 bg-red-500 rounded-full h-4 w-4 flex items-center justify-center text-white text-xs">
+                  {bagItemsLength}
+                </div>
                 <MdOutlineShoppingBag className="text-xl text-gray-700" />
                 <span style={{ fontSize: "10px" }} className="font-bold">
                   Bag
