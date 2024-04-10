@@ -27,7 +27,7 @@ function ProductDisplayCard(product) {
   return (
     <>
       <div
-        className="flex flex-col gap-2 w-fit m-2 hover:shadow-2xl p-2 rounded-md"
+        className="flex flex-col gap-2 w-fit m-2 hover:shadow-2xl p-2 rounded-md cursor-pointer"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={navigateToProductDetailsPage}

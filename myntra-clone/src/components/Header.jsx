@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { AiOutlineUser } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -8,12 +8,23 @@ import { useSelector } from "react-redux";
 function Header() {
   const BagItems = useSelector((store) => store.Bag);
   const bagItemsLength = BagItems.length;
+
+  const navigation = useNavigate();
+
+  const navigateToBag = () => {
+    navigation("../bag");
+  };
+
+  const navigateToHome = () => {
+    navigation("");
+  };
   return (
     <>
       <div className="p-0 m-0 h-20 bg-white shadow-lg w-auto top-0 z-10 sticky">
         <div className=" h-full flex items-center">
           <div className="flex w-full h-full items-center">
             <img
+              onClick={navigateToHome}
               style={{ marginLeft: "8%" }}
               src="https://cdn.iconscout.com/icon/free/png-256/free-myntra-2709168-2249158.png"
               alt="myntra-logo"
@@ -100,7 +111,10 @@ function Header() {
                   Wishlist
                 </span>
               </div>
-              <div className="flex flex-col items-center gap-1 cursor-pointer relative">
+              <div
+                className="flex flex-col items-center gap-1 cursor-pointer relative"
+                onClick={navigateToBag}
+              >
                 <div className="absolute -top-2 font-semibold -right-2 bg-red-500 rounded-full h-4 w-4 flex items-center justify-center text-white text-xs">
                   {bagItemsLength}
                 </div>

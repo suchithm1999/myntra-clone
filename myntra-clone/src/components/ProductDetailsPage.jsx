@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import UseToGetProductLists from "../custom-hook/UseToGetProductsLists";
 import { useDispatch, useSelector } from "react-redux";
 import { BagActions } from "../Store/BagStore";
@@ -8,6 +8,7 @@ function ProductDetailsPage() {
   const productList = UseToGetProductLists();
   const dispatch = useDispatch();
   const bagItems = useSelector((store) => store.Bag);
+  const navigation = useNavigate();
 
   const addItemToBag = () => {
     dispatch(BagActions.addToBag(product));
@@ -15,6 +16,10 @@ function ProductDetailsPage() {
 
   const removeItemFromBag = () => {
     dispatch(BagActions.removeFromBag(product));
+  };
+
+  const navigateToBag = () => {
+    navigation("../bag");
   };
 
   const product = productList.filter(
@@ -60,12 +65,20 @@ function ProductDetailsPage() {
               </button>
             )}
             {bagItems.find((item) => item === product.id) && (
-              <button
-                onClick={removeItemFromBag}
-                className="w-full bg-red-500 rounded-lg text-white font-bold p-4 active:bg-red-800"
-              >
-                Remove from Bag
-              </button>
+              <div className="flex gap-4">
+                <button
+                  onClick={removeItemFromBag}
+                  className="w-full bg-red-500 rounded-lg text-white font-bold p-4 active:bg-red-800"
+                >
+                  Remove from Bag
+                </button>
+                <button
+                  onClick={navigateToBag}
+                  className="w-full bg-white border-pink-500 rounded-lg border text-pink-500 font-bold p-4 active:bg-pink-400 active:text-white"
+                >
+                  Go to Bag
+                </button>
+              </div>
             )}
           </div>
           <div className="flex relative flex-col" style={{ top: "28%" }}>
