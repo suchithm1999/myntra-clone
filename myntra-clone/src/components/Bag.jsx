@@ -1,10 +1,12 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UseToGetProductLists from "../custom-hook/UseToGetProductsLists";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BagActions } from "../Store/BagStore";
 
 function Bag() {
   const productList = UseToGetProductLists();
+  const dispatch = useDispatch();
 
   const navigation = useNavigate();
 
@@ -24,6 +26,14 @@ function Bag() {
 
   const removeAllItemsFromSelected = () => {
     setItemsSelected([]);
+  };
+
+  const selectAllItemsFromBag = () => {
+    setItemsSelected(BagItems);
+  };
+
+  const removeAllItems = () => {
+    dispatch(BagActions.removeAllItemsFromBag());
   };
 
   const addAllItemsToSelected = () => {
@@ -51,7 +61,7 @@ function Bag() {
   const calculateTotalMRP = () => {
     let totalMRP = 0;
     itemsSelected.forEach((item) => {
-      totalMRP += item.price; // Assuming price is the property representing MRP
+      totalMRP += item.price;
     });
     return totalMRP;
   };
@@ -81,7 +91,7 @@ function Bag() {
                       Hey, it fells so light!
                     </span>
                     <span className="text-xs text-gray-600 font-light">
-                      There is nothing in you bag. Let's add some items.
+                      {`There is nothing in you bag. Let's add some items.`}
                     </span>
                     <button
                       onClick={navigateToHome}
@@ -107,8 +117,33 @@ function Bag() {
                       {BagItems ? BagItems.length : 0} ITEMS SELECTED
                     </span>
                   </div>
-                  <div className="text-xs text-gray-400 font-medium active:font-bold">
-                    <button onClick={removeAllItemsFromSelected}>REMOVE</button>
+                  <div className="text-xs text-gray-400 font-medium">
+                    {itemsSelected && itemsSelected.length > 0 ? (
+                      <>
+                        <button
+                          onClick={removeAllItemsFromSelected}
+                          className="active:font-bold"
+                        >
+                          UNSELECT
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          onClick={selectAllItemsFromBag}
+                          className="active:font-bold"
+                        >
+                          SELECT
+                        </button>
+                      </>
+                    )}{" "}
+                    |{" "}
+                    <button
+                      className="active:font-bold"
+                      onClick={removeAllItems}
+                    >
+                      REMOVE
+                    </button>
                   </div>
                 </div>
                 {BagItems &&

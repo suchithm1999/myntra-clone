@@ -14,6 +14,10 @@ const Bag = createSlice({
       state = state.filter((id) => id !== payload.payload.id);
       return state;
     },
+    removeAllItemsFromBag: (state) => {
+      state = [];
+      return state;
+    },
   },
 });
 
